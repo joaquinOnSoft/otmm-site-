@@ -3,6 +3,7 @@
 Web site to expose assets stored in an instance of OpenText Media Management (OTMM)
 
 ### Prerequistes
+You need to install `node.js` and `npm` to run this project
 
 ### Local Environment set up
 
