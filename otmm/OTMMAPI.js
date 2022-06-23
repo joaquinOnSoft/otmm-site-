@@ -1,28 +1,17 @@
 import axios from 'axios';
-import querystring from 'node:querystring';
 import 'dotenv/config';
 
-const urlBase = process.env.OTMM_API_URL;
-const user = process.env.OTMM_USER;
-const pass = process.env.OTMM_PASSWORD;
+//const urlBase = process.env.OTMM_API_URL;
 
-class OTMMAPI{
-	
+export default class OTMMAPI {
+
+	static urlBase = process.env.OTMM_API_URL;
+	static user = process.env.OTMM_USER;
+	static pass = process.env.OTMM_PASSWORD;
+
 	/**
-	 * <strong>Create a Session</strong>
-	 * Create a security Session in OTMM. It returns a valid SecuritySession
-	 * object if the provided credentials are valid. This is equivalent to login to OTMM
-	 * <ul>
-	 * 	<li>Method: POST</li>
-	 * 	<li>API method: /v6/sessions</li>
-	 * 	<li>URL example: https://developer.opentext.com/otmmapi/v6/sessions</li>
-	 * </ul>
-	 * <strong>NOTE:</strong>
-	 * With the exception of methods related to 'sessions', any call to an OTMM REST API
-	 * method must include the session id in the 'X-Requested-By' header.
-	 * @param user - User alias
-	 * @param pass - User password
-	 * @return session information
+	 * Do a GET call to an API method
+	 * @param session - OTMM session object that looks like this:
 	 * <code>
 	 * {
 	 *	  session_resource: {
@@ -41,31 +30,9 @@ class OTMMAPI{
 	 *	  }
 	 *	}
 	 * </code>
-	 */
-	static async createSession(user, pass){
-		try {
-			let link = urlBase + "/v6/sessions";
-			console.log("URL: " + link);
-			
-			let payloadJSON  = {
-				"username": user,
-				"password": pass
-			};
-			let payload =  (new URLSearchParams(payloadJSON)).toString()
-
-			const resp = await axios.post(link, payload, {
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-				}
-			});
-			
-			return resp.data;
-		} catch (err) {
-			console.error(err);
-			return null;
-		}
-	}
-
+	 * @param url - URL of the API method
+	 * @param parameters - method parameters
+	 * */
 	static async get(session, url, parameters){
 		if(parameters == null){
 			parameters = {};
@@ -81,68 +48,5 @@ class OTMMAPI{
 					params: parameters
 				});
 	}
-
-	/**
-	* Retrieve all recent Asset
-	 * <ul>
-	 * 	<li>Method: GET</li>
-	 * 	<li>API method: /v6/assets/recent</li>
-	 * 	<li>URL example: https://developer.opentext.com/otmmapi/v6/assets/recent</li>
-	 * </ul>	
-	*/
-	static async retrieveAllRecentAssets(session, loadType="full", limit=25){
-		try {		
-			let link = urlBase + "/v6/assets/recent";
-			console.log("URL: " + link);
-			
-			let params = {
-				//Data load type
-				//Enum: "full" "system" "metadata" "inherited_metadata" "custom"
-				load_type: "full",
-				// Maximum number of items to retrieve.
-				limit: 25
-			};
-			
-			let result = await OTMMAPI.get(session, link, params);					
-			
-			return result.data;
-		} catch (error) {
-			console.error("Error retrieveAllRecentAssets: " + error);
-			return null;
-		}
-	}
-
-	
-	/**
-	 * Get list of collections for current user
-	 * @see <a href="https://masteringjs.io/tutorials/axios/headers">Setting Request Headers with Axios</a>
-	 */
-	static async getListOfCollectionsForCurrentUser(session){
-		try {		
-			let link = urlBase + "/v6/collections";
-			console.log("URL: " + link);
-			
-			let result = await OTMMAPI.get(session, link, null);					
-			
-			return result.data;
-		} catch (error) {
-			console.error("Error getListOfCollectionsForCurrentUser: " + error);
-			return null;
-		}
-	}
 }
 
-
-OTMMAPI.createSession(user, pass).then( session => {
-    console.log(session);
-
-	OTMMAPI.retrieveAllRecentAssets(session).then(recentAssets => {
-		console.log( JSON.stringify(recentAssets) );
-	});	
-		
-	/*
-	OTMMAPI.getListOfCollectionsForCurrentUser(session).then(collections => {
-		console.log( JSON.stringify(collections) );
-	});	
-	*/
-});
