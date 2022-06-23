@@ -66,14 +66,19 @@ class OTMMAPI{
 		}
 	}
 
-	static async get(session, url){
-		 return await axios.get(url, 
+	static async get(session, url, parameters){
+		if(parameters == null){
+			parameters = {};
+		}
+		
+		return await axios.get(url, 
 				{
 					headers: {
 						"X-Requested-By": session.session_resource.session.id,
 						"Authorization":  "Bearer otmmToken " + session.session_resource.session.message_digest,
 						"otmmauthtoken":  session.session_resource.session.message_digest
-					}
+					},
+					params: parameters
 				});
 	}
 
@@ -85,7 +90,26 @@ class OTMMAPI{
 	 * 	<li>URL example: https://developer.opentext.com/otmmapi/v6/assets/recent</li>
 	 * </ul>	
 	*/
-	static async retrieveAllRecentAssets(){
+	static async retrieveAllRecentAssets(session, loadType="full", limit=25){
+		try {		
+			let link = urlBase + "/v6/assets/recent";
+			console.log("URL: " + link);
+			
+			let params = {
+				//Data load type
+				//Enum: "full" "system" "metadata" "inherited_metadata" "custom"
+				load_type: "full",
+				// Maximum number of items to retrieve.
+				limit: 25
+			};
+			
+			let result = await OTMMAPI.get(session, link, params);					
+			
+			return result.data;
+		} catch (error) {
+			console.error("Error retrieveAllRecentAssets: " + error);
+			return null;
+		}
 	}
 
 	
@@ -98,11 +122,11 @@ class OTMMAPI{
 			let link = urlBase + "/v6/collections";
 			console.log("URL: " + link);
 			
-			let result = await OTMMAPI.get(session, link);					
+			let result = await OTMMAPI.get(session, link, null);					
 			
 			return result.data;
 		} catch (error) {
-			console.error("Error: " + error);
+			console.error("Error getListOfCollectionsForCurrentUser: " + error);
 			return null;
 		}
 	}
@@ -111,8 +135,14 @@ class OTMMAPI{
 
 OTMMAPI.createSession(user, pass).then( session => {
     console.log(session);
-	
+
+	OTMMAPI.retrieveAllRecentAssets(session).then(recentAssets => {
+		console.log( JSON.stringify(recentAssets) );
+	});	
+		
+	/*
 	OTMMAPI.getListOfCollectionsForCurrentUser(session).then(collections => {
 		console.log( JSON.stringify(collections) );
 	});	
+	*/
 });
