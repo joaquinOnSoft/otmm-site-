@@ -26,4 +26,4 @@ node Index.js
 ```
 
 ## Dependencies
-![Upgrading npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/)
+[Upgrading npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/)
