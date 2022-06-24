@@ -2,10 +2,10 @@
 
 Web site to expose assets stored in an instance of OpenText Media Management (OTMM)
 
-### Prerequistes
+## Prerequistes
 You need to install `node.js` and `npm` to run this project
 
-### Local Environment set up
+## Local Environment set up
 
 Follow these steps:
 
@@ -20,7 +20,26 @@ cd otmm-site-
 npm install
 ```
 
-3) Launch your server
+3) Modify your `.env` file to set the URL, user and password of you OTMM environemnt
+```
+OTMM_API_URL=<OTMM-API-URL>
+OTMM_USER=<USER>
+OTMM_PASSWORD=<PASSWORD>
+PORT=5000
+```
+
+4) (OPTIONAL) Execute all test
+```
+npm test
+```
+
+or
+
+```
+jest
+```
+
+6) Launch your server
 ```
 node Index.js
 ```
