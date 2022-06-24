@@ -11,18 +11,18 @@ You need to install `node.js` and `npm` to run this project
 
 Follow these steps:
 
-1) Clone this repo
+1. Clone this repo
 ```
 git clone https://github.com/joaquinOnSoft/otmm-site-.git
 ```
 
-2) Change dir to `otmm-site-` and install all the required dependencies
+2. Change dir to `otmm-site-` and install all the required dependencies
 ```
 cd otmm-site-
 npm install
 ```
 
-3) Modify your `.env` file to set the URL, user and password of you OTMM environemnt
+3. Modify your `.env` file to set the URL, user and password of you OTMM environemnt
 ```
 OTMM_API_URL=<OTMM-API-URL>
 OTMM_USER=<USER>
@@ -30,7 +30,7 @@ OTMM_PASSWORD=<PASSWORD>
 PORT=5000
 ```
 
-4) (OPTIONAL) Execute all test
+4. (OPTIONAL) Execute all test
 ```
 npm test
 ```
@@ -41,7 +41,7 @@ or
 jest
 ```
 
-6) Launch your server
+5. Launch your server
 ```
 node Index.js
 ```
