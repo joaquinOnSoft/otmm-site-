@@ -48,7 +48,12 @@ node Index.js
 
 ## Useful links related with this project
 
+### Test
  - [Test runner](https://nodejs.org/api/test.html)
  - [Node.js Unit Testing: Get Started Quickly With Examples](https://www.testim.io/blog/node-js-unit-testing-get-started-quickly-with-examples/)
+ - [Setup and Teardown](https://jestjs.io/docs/setup-teardown)
+ 
+### Node.js
  - [Upgrading npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/)
  - [Does Jest support ES6 import/export?](https://stackoverflow.com/questions/35756479/does-jest-support-es6-import-export)
+ 
