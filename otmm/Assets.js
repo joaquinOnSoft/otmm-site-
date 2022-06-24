@@ -32,17 +32,3 @@ export default class Assets extends OTMMAPI {
 		}
 	}
 }
-
-/*
-OTMMAPI.createSession(user, pass).then( session => {
-    console.log(session);
-
-	OTMMAPI.retrieveAllRecentAssets(session).then(recentAssets => {
-		console.log( JSON.stringify(recentAssets) );
-	});	
-		
-	OTMMAPI.getListOfCollectionsForCurrentUser(session).then(collections => {
-		console.log( JSON.stringify(collections) );
-	});	
-});
-*/
