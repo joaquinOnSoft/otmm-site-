@@ -24,14 +24,16 @@ export default class Assets extends OTMMAPI {
 			}
 					
 			let params = {
+					"load_type": "system",
+					"level_of_detail": "slim",
 					"selection_context": {
 						"selection_context_param": {
 							"selection_context": {
-								"asset_ids": assetIds,
-								"type": "com.artesia.asset.selection.AssetIdsSelectionContext",
-								"include_descendants": "NONE",
 								"child_type": "ASSETS",
-								"include_deleted_assets": false
+								"include_descendants": "NONE",	
+								"type": "com.artesia.asset.selection.AssetIdsSelectionContext",															
+								"include_deleted_assets": false,
+								"asset_ids": assetIds,
 							}
 						}
 					}
