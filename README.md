@@ -52,8 +52,12 @@ node Index.js
  - [Test runner](https://nodejs.org/api/test.html)
  - [Node.js Unit Testing: Get Started Quickly With Examples](https://www.testim.io/blog/node-js-unit-testing-get-started-quickly-with-examples/)
  - [Setup and Teardown](https://jestjs.io/docs/setup-teardown)
+ - [Does Jest support ES6 import/export?](https://stackoverflow.com/questions/35756479/does-jest-support-es6-import-export)
+
  
+### Axios
+ - [How to correctly use axios params with arrays](https://stackoverflow.com/questions/49944387/how-to-correctly-use-axios-params-with-arrays)
+
 ### Node.js
  - [Upgrading npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/)
- - [Does Jest support ES6 import/export?](https://stackoverflow.com/questions/35756479/does-jest-support-es6-import-export)
  
