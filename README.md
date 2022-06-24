@@ -25,5 +25,9 @@ npm install
 node Index.js
 ```
 
-## Dependencies
-[Upgrading npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/)
+## Useful links related with this project
+
+ - [Test runner](https://nodejs.org/api/test.html)
+ - [Node.js Unit Testing: Get Started Quickly With Examples](https://www.testim.io/blog/node-js-unit-testing-get-started-quickly-with-examples/)
+ - [Upgrading npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/)
+ - [Does Jest support ES6 import/export?](https://stackoverflow.com/questions/35756479/does-jest-support-es6-import-export)
