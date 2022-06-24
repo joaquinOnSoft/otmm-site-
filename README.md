@@ -2,6 +2,8 @@
 
 Web site to expose assets stored in an instance of OpenText Media Management (OTMM)
 
+> **NOTE**: This is a work in progress. It's not completed. Be patient :-)
+
 ## Prerequistes
 You need to install `node.js` and `npm` to run this project
 
