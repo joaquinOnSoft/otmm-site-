@@ -30,9 +30,17 @@ export default class Assets extends OTMMAPI {
 			// If you use an upper version of Tomcat 8.5 it throws this exception if the URL path contains '[' and ']'. For older versions, it works.
 			if(Array.isArray(assetIds)){
 				var assetIdsStr = SQUARE_BRACKET_LEFT;
-				assetIds.forEach(id => assetIdsStr += id);	
-				assetIdsStr = SQUARE_BRACKET_RIGHT;
+					
+				var size = assetIds.length;
+				var beforeLast = (size - 1);				
+				for(var i=0; i < size; i++){
+					assetIdsStr += assetIds[i];
+					if (i != beforeLast){
+						assetIdsStr += ",";
+					}
+				}
 				
+				assetIdsStr = SQUARE_BRACKET_RIGHT;				
 				assetIds = assetIdsStr;
 			}
 			else if (typeof assetIds === 'string' || assetIds instanceof String) {					

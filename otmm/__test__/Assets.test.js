@@ -11,8 +11,8 @@ beforeEach(async () => {
 	session = await Sessions.createSession(OTMMAPI.user, OTMMAPI.pass);
 });
 
-test('Retrieve assets based on the provided selection context (Array Ids)', async () => {		
-	var assetIds = ["411811a6608665e00d3bac8671e67cad043fd40a"];
+test('Retrieve assets based on the provided selection context (Multiple Ids)', async () => {		
+	var assetIds = ["411811a6608665e00d3bac8671e67cad043fd40a", "b156decf0fba4323e646438f0c64f36856b382ef"];
 	
 	var assets = await Assets.retrieveAssets(session, assetIds);
 	expect(assets).not.toBe(null);
