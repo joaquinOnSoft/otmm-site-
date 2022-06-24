@@ -1,7 +1,7 @@
 import OTMMAPI from './OTMMAPI.js';
 
-const SQUARE_BRACket_LEFT = "%5B";
-const SQUARE_BRACket_RIGHT = "%5D";
+const SQUARE_BRACKET_LEFT = "%5B";
+const SQUARE_BRACKET_RIGHT = "%5D";
 	
 export default class Assets extends OTMMAPI {
 	
@@ -29,14 +29,14 @@ export default class Assets extends OTMMAPI {
 			// https://stackoverflow.com/questions/54287922/the-valid-characters-are-defined-in-rfc-7230-and-rfc-3986
 			// If you use an upper version of Tomcat 8.5 it throws this exception if the URL path contains '[' and ']'. For older versions, it works.
 			if(Array.isArray(assetIds)){
-				var assetIdsStr = SQUARE_BRACket_LEFT;
+				var assetIdsStr = SQUARE_BRACKET_LEFT;
 				assetIds.forEach(id => assetIdsStr += id);	
-				assetIdsStr = SQUARE_BRACket_RIGHT;
+				assetIdsStr = SQUARE_BRACKET_RIGHT;
 				
 				assetIds = assetIdsStr;
 			}
 			else if (typeof assetIds === 'string' || assetIds instanceof String) {					
-				assetIds = SQUARE_BRACket_LEFT  + assetIds + SQUARE_BRACket_RIGHT;
+				assetIds = SQUARE_BRACKET_LEFT  + assetIds + SQUARE_BRACKET_RIGHT;
 			}
 					
 
