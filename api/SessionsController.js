@@ -10,7 +10,7 @@ export default class SessionsController {
 	 * 	<li>Method: POST</li>
 	 * 	<li>API method: /api/v1/sessions</li>
 	 * 	<li>URL example: http://localhost:5000/api/v1/sessions</li>
-	 * 	<li>Body (raw), e.g.:
+	 * 	<li>Request body schema: raw. Example:
  	 * 		<code>
 	 * 		{
      * 			"user": "myusernameexample",
