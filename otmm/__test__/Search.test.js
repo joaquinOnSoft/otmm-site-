@@ -16,8 +16,10 @@ test('Search - Perform a text based Search', async () => {
 	expect(results).not.toBe(null);
 	expect(results.search_result_resource).not.toBe(null);
 	expect(results.search_result_resource.search_result).not.toBe(null);
-	expect(results.search_result_resource.search_result.asset_id_list).toBeGreaterThan(0);
+	expect(results.search_result_resource.search_result.asset_id_list).not.toBe(null);
+	expect(results.search_result_resource.search_result.asset_id_list.length).toBeGreaterThan(0);
 	expect(results.search_result_resource.search_result).not.toBe(null);
-	expect(results.search_result_resource.search_result.facet_field_response_list).toBeGreaterThan(0);	
+	expect(results.search_result_resource.search_result.facet_field_response_list).not.toBe(null);	
+	expect(results.search_result_resource.search_result.facet_field_response_list.length).toBeGreaterThan(0);	
 });  
 
