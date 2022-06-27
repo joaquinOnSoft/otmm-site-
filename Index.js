@@ -16,6 +16,7 @@ class Index {
 		Index.app.use(cors());
 		Index.app.use(express.json());
 		//Index.app.use('/api/v1/movies', MoviesRoute.configRoutes(Index.router));
+		Index.app.use('/api/v1/sessions', SessionsRoute.configRoutes(Index.router));
 		Index.app.use('*', (req, res) => {
 			res.status(404).json({error: 'not found'});
 		})
