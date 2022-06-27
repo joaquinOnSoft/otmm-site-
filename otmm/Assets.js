@@ -18,6 +18,8 @@ export default class Assets extends OTMMAPI {
 	static async retrieveAssets(session, assetIds){	
 		try {		
 			let link = this.urlBase + "/v6/assets";
+
+			console.log("retrieveAssets" + JSON.stringify(session));
 			console.log("URL: " + link);
 			console.log("assetIds: " + assetIds);
 
@@ -29,6 +31,7 @@ export default class Assets extends OTMMAPI {
 			// https://stackoverflow.com/questions/54287922/the-valid-characters-are-defined-in-rfc-7230-and-rfc-3986
 			// If you use an upper version of Tomcat 8.5 it throws this exception if the URL path contains '[' and ']'. For older versions, it works.
 			if(Array.isArray(assetIds)){
+				console.log("\n\tAssetIds is array");
 				var assetIdsStr = SQUARE_BRACKET_LEFT;
 					
 				var size = assetIds.length;
@@ -43,8 +46,16 @@ export default class Assets extends OTMMAPI {
 				assetIdsStr = SQUARE_BRACKET_RIGHT;				
 				assetIds = assetIdsStr;
 			}
-			else if (typeof assetIds === 'string' || assetIds instanceof String) {					
-				assetIds = SQUARE_BRACKET_LEFT  + assetIds + SQUARE_BRACKET_RIGHT;
+			else if (typeof assetIds === 'string' || assetIds instanceof String) {	
+				console.log("\n\tAssetIds is string");
+
+				if ( assetIds.startsWith("[") ){				
+					console.log("\n\tAssetIds adding brackets");
+					assetIds = assetIds.replace("[", SQUARE_BRACKET_LEFT).replace("]", SQUARE_BRACKET_RIGHT);
+				}
+				else {
+					assetIds = SQUARE_BRACKET_LEFT  + assetIds + SQUARE_BRACKET_RIGHT;	
+				}
 			}
 					
 

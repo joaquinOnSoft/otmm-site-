@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import AssetsRoute from './api/AssetsRoute.js';
-//import SessionsRoute from './api/CollectionsRoute.js';
-//import SessionsRoute from './api/SearchRoute.js';
+//import CollectionsRoute from './api/CollectionsRoute.js';
+//import SearchRoute from './api/SearchRoute.js';
 import SessionsRoute from './api/SessionsRoute.js';
 
 class Index {
