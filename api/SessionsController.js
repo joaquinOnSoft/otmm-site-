@@ -10,6 +10,11 @@ export default class SessionsController {
 	 * 	<li>Method: POST</li>
 	 * 	<li>API method: /api/v1/sessions</li>
 	 * 	<li>URL example: http://localhost:5000/api/v1/sessions</li>
+	 *  <li>Headers: 
+	 *  	<ul>
+	 * 			<li>Content-Type: application/json</li>
+	 * 		</ul>
+	 *  </li>
 	 * 	<li>Request body schema: raw. Example:
  	 * 		<code>
 	 * 		{
@@ -43,6 +48,7 @@ export default class SessionsController {
 		console.log("apiCreateSessions called!");
         const user = req.body.user;
         const pass = req.body.password;
+        console.log(JSON.stringify(req.body));
 
         console.log(`${user} - ${pass}`);
 
