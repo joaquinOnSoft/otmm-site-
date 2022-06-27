@@ -51,7 +51,7 @@ export default class Assets extends OTMMAPI {
 
 				if ( assetIds.startsWith("[") ){				
 					console.log("\n\tAssetIds adding brackets");
-					assetIds = assetIds.replace("[", SQUARE_BRACKET_LEFT).replace("]", SQUARE_BRACKET_RIGHT);
+					//assetIds = assetIds.replace("[", SQUARE_BRACKET_LEFT).replace("]", SQUARE_BRACKET_RIGHT);
 				}
 				else {
 					assetIds = SQUARE_BRACKET_LEFT  + assetIds + SQUARE_BRACKET_RIGHT;	
