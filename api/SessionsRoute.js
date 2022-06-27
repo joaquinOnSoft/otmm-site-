@@ -1,4 +1,4 @@
-import MoviesController from './SessionsController.js';
+import SessionsController from './SessionsController.js';
 
 export default class SesionsRoute {
 	/**
@@ -10,7 +10,7 @@ export default class SesionsRoute {
 	 * 
 	 */
 	static configRoutes(router){
-		router.route('/').get(SessionsController.apiCreateSessions);
+		router.route('/').post(SessionsController.apiCreateSessions);
 		return router;
 	}
 }

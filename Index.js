@@ -25,7 +25,7 @@ class Index {
 
 		try{
 			Index.app.listen(port, () => {
-				console.log(`Server us running on port ${port}`);
+				console.log(`Server is running on port ${port}`);
 			});
 		} catch (e){
 			console.error(e);
