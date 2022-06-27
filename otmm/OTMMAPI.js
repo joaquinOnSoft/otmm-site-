@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'qs';
 import 'dotenv/config';
 
 //const urlBase = process.env.OTMM_API_URL;
@@ -46,10 +45,7 @@ export default class OTMMAPI {
 						"Authorization":  "Bearer otmmToken " + session.session_resource.session.message_digest,
 						"otmmauthtoken":  session.session_resource.session.message_digest
 					},
-					params: parameters,
-					paramsSerializer: params => {
-						return qs.stringify(params)
-					}
+					params: parameters
 				});
 	}
 }
