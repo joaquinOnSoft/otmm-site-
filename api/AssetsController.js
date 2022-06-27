@@ -1,6 +1,7 @@
+import AbstractOTMMController from './AbstractOTMMController.js';
 import Assets from '../otmm/Assets.js';
 
-export default class AssetsController {
+export default class AssetsController extends AbstractOTMMController{
 	
 	/**
 	 * <strong>Retrieve assets based on the provided selection context.</strong>
@@ -31,27 +32,10 @@ export default class AssetsController {
 	 */
     static async apiRetrieveAssets(req, res, next) {
 		console.log("apiRetrieveAssets called!");
-        const id = req.headers.id;
-		const messageDigest = req.headers.message_digest;
-        //const assetIds = req.query.assetIds;
 		
-		console.log(`\t 	id: ${id}`);
-		console.log(`\t message_digest: ${messageDigest}`);
-
-        let response = {
-			"id": id,
-			"message_digest": messageDigest
-		};
-
-		/*		
-		if(assetIds == null || typeof assetIds === 'undefined'){
-			response = {error: "'assetIds' param is mandatory"};
-		}
-		
-        if(response == null){
-			console.log("Retrieve assets based on the provided selection context...");
-        	response = await Assets.retrieveAssets(session, assetIds);
-        }*/
+		let session = AbstractOTMMController.prepareSession(req);
+	
+    	response = await Assets.retrieveAssets(session, assetIds);
 
         res.json(response);
 	}

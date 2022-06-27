@@ -44,6 +44,8 @@ export default class SessionsController {
         const user = req.body.user;
         const pass = req.body.password;
 
+        console.log(`${user} - ${pass}`);
+
         let response = null;
         if(user && typeof user !== 'undefined' && pass && typeof pass !== 'undefined'){
 			console.log("Create session...");
