@@ -1,0 +1,59 @@
+import Assets from '../otmm/Assets.js';
+
+export default class AssetsController {
+	
+	/**
+	 * <strong>Retrieve assets based on the provided selection context.</strong>
+	 * <ul>
+	 * 	<li>Method: GET</li>
+	 * 	<li>API method: /api/v1/assets</li>
+	 * 	<li>URL example: http://localhost:5000/api/v1/assets</li>
+	 *  <li>
+	 *    Headers:
+	 *		<ul>
+	 *			<li>
+	 *				<strong>id</strong>: Session identifier, e.g. 471542185
+	 *			</li>
+	 *			<li>
+	 *				<strong>message_digest</strong>: string of digits created by a one-way hashing formula, e.g. 'b8271108836bef44130e71ee91bd51d4e75e2733'
+	 *          </li>
+	 *		</ul>
+	 *  </li>
+	 * 	<li>Query params:	 
+	 *		<ul>
+	 *			<li>
+	 *				<strong>arrayIds</strong>: Array of asset identifiers.
+	 *			</li>
+	 *		</ul>	 
+	 * 	</li>
+	 * </ul>
+	 * @return 
+	 */
+    static async apiRetrieveAssets(req, res, next) {
+		console.log("apiRetrieveAssets called!");
+        const id = req.headers.id;
+		const messageDigest = req.headers.message_digest;
+        //const assetIds = req.query.assetIds;
+		
+		console.log(`\t 	id: ${id}`);
+		console.log(`\t message_digest: ${messageDigest}`);
+
+        let response = {
+			"id": id,
+			"message_digest": messageDigest
+		};
+
+		/*		
+		if(assetIds == null || typeof assetIds === 'undefined'){
+			response = {error: "'assetIds' param is mandatory"};
+		}
+		
+        if(response == null){
+			console.log("Retrieve assets based on the provided selection context...");
+        	response = await Assets.retrieveAssets(session, assetIds);
+        }*/
+
+        res.json(response);
+	}
+	
+}

@@ -12,7 +12,7 @@ export default class Assets extends OTMMAPI {
 	 * 	<li>API method: /v6/assets</li>
 	 * 	<li>URL example: https://developer.opentext.com/otmmapi/v6/assets</li>
 	 * </ul>	
-	 * @param session
+	 * @param session - OTMM session object
 	 * @param assetIds - Array of asset identifiers or a single asset identifier (string)
 	 */
 	static async retrieveAssets(session, assetIds){	
