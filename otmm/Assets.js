@@ -28,9 +28,7 @@ export default class Assets extends OTMMAPI {
 				qs += param + "=" + parameters[param] + "&";
 			}							
 		}
-		
-		console.log(qs);
-		
+	
 		return qs;
 	}		
 	
@@ -48,14 +46,19 @@ export default class Assets extends OTMMAPI {
 			
 			// We add the first square brace
 			objString += '[';
+			console.debug(objString);
 			for(var i=0; i< size; i++){
-				objString += `${Assets.stringify(value[i])}`;
+				objString += `${Assets.stringify(value[i]).trim()}`;
+				
+				// We add the comma
 				if(i != beforeLast){
 					objString += ",";
 				}
+				console.debug("--------" + objString);
 			}
 			// We add the last square brace
 			objString += ']';
+			console.debug("--------" + objString);
 		}
 		else if (typeof value === 'object') {
 			// We add the first curly brace
@@ -70,7 +73,8 @@ export default class Assets extends OTMMAPI {
 			}
 			// We add the last curly brace
 			objString += '}';
-		} else if (typeof value === 'string') {
+		} 
+		else if (typeof value === 'string') {
 			objString += `"${value}"`;
 		} 
 		else if (typeof value === 'number' || typeof value === 'boolean'){
@@ -93,10 +97,19 @@ export default class Assets extends OTMMAPI {
 	static async retrieveAssets(session, assetIds){	
 		try {		
 			var link = this.urlBase + "/v6/assets";
+			
+			if(typeof assetIds === 'string'){
+				if(assetIds.startsWith("[")){
+					assetIds = assetIds.replace("[", "").replace("]", "");
+				}
 
-			//console.log("retrieveAssets: " + JSON.stringify(session));
-			//console.log("URL: " + link);
-			console.log("assetIds: " + assetIds);
+				var assets = assetIds.split(",");
+				
+				assetIds = [];
+				for(const asset of assets){
+					assetIds.push(asset);
+				}				
+			}
 			
 			var params = {
 					"load_type": "system",

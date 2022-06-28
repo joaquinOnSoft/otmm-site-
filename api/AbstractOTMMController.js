@@ -6,7 +6,7 @@ export default class AbstractOTMMController {
 		const messageDigest = req.headers.message_digest;
 
 		console.log(`\t id: ${id}`);
-		console.log(`\t message_digest: ${req.headers.messageDigest}`);
+		console.log(`\t message_digest: ${messageDigest}`);
 
         let headers = 	{
 				session_resource: {
