@@ -16,6 +16,8 @@ test('Retrieve assets based on the provided selection context (Multiple Ids)', a
 	
 	var assets = await Assets.retrieveAssets(session, assetIds);
 	expect(assets).not.toBe(null);
+	expect(assets.assets_resource.asset_list).not.toBe(null);
+	expect(assets.assets_resource.asset_list.length).toBe(2);		
 });  
 
 test('Retrieve assets based on the provided selection context (Single Id)', async () => {		
@@ -23,6 +25,8 @@ test('Retrieve assets based on the provided selection context (Single Id)', asyn
 	
 	var assets = await Assets.retrieveAssets(session, assetIds);
 	expect(assets).not.toBe(null);
+	expect(assets.assets_resource.asset_list).not.toBe(null);
+	expect(assets.assets_resource.asset_list.length).toBe(1);
 });  
 
 test('Assets - retrieve all recent assets', async () => {		
@@ -32,4 +36,3 @@ test('Assets - retrieve all recent assets', async () => {
 	expect(assets.assets_resource.asset_list).not.toBe(null);
 	expect(assets.assets_resource.asset_list.length).toBeGreaterThan(0);	
 });  
-
