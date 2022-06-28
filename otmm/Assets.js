@@ -1,9 +1,5 @@
 import querystring from 'querystring';
 import OTMMAPI from './OTMMAPI.js';
-
-const ENCODEC_SQUARE_BRACKET_LEFT = "%5B";
-const ENCODEC_SQUARE_BRACKET_RIGHT = "%5D";
-const ENCODEC_DOUBLE_QUOTE = "%22";
 	
 export default class Assets extends OTMMAPI {
 
@@ -21,9 +17,11 @@ export default class Assets extends OTMMAPI {
 		var qs = '';
 		var value = null;
 		
-		for (const param of Object.keys(parameters)) {			
-			if (typeof parameters[param] === 'object'){
-				value = await encodeURIComponent(JSON.stringify(parameters[param])) ;
+		for (const param of Object.keys(parameters)) {		
+			value = parameters[param];
+			
+			if (typeof value === 'object' || Array.isArray(value)){
+				value = await encodeURIComponent(Assets.stringify(parameters[param])) ;
 				qs += param + "=" + value + "&";
 			}
 			else{
@@ -31,8 +29,56 @@ export default class Assets extends OTMMAPI {
 			}							
 		}
 		
+		console.log(qs);
+		
 		return qs;
 	}		
+	
+	/**
+	* @see Creating your own simplified implementation of JSON.stringify() 
+	* https://levelup.gitconnected.com/creating-your-own-simplified-implementation-of-json-stringify-ed8e50b9144a
+	*/
+	static stringify(value) {
+		const lastKey = Object.keys(value).pop();
+		let objString = '';
+		
+		if (Array.isArray(value)){
+			let size = value.length;
+			let beforeLast = size - 1;
+			
+			// We add the first square brace
+			objString += '[';
+			for(var i=0; i< size; i++){
+				objString += `${Assets.stringify(value[i])}`;
+				if(i != beforeLast){
+					objString += ",";
+				}
+			}
+			// We add the last square brace
+			objString += ']';
+		}
+		else if (typeof value === 'object') {
+			// We add the first curly brace
+			objString += '{';
+			for (const key in value) {
+				objString += `"${key}":${Assets.stringify(value[key])}`;
+				
+				// We add the comma
+				if (key !== lastKey) {
+					objString += ',';
+				}
+			}
+			// We add the last curly brace
+			objString += '}';
+		} else if (typeof value === 'string') {
+			objString += `"${value}"`;
+		} 
+		else if (typeof value === 'number' || typeof value === 'boolean'){
+			objString += `${value}`;
+		}
+		
+		return objString;
+	}
 	
 	/**
 	 * Retrieve assets based on the provided selection context.
