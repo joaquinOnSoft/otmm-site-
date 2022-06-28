@@ -1,9 +1,69 @@
 import OTMMAPI from './OTMMAPI.js';
 
-const SQUARE_BRACKET_LEFT = "%5B";
-const SQUARE_BRACKET_RIGHT = "%5D";
+const ENCODEC_SQUARE_BRACKET_LEFT = "%5B";
+const ENCODEC_SQUARE_BRACKET_RIGHT = "%5D";
+const ENCODEC_DOUBLE_QUOTE = "%22";
 	
 export default class Assets extends OTMMAPI {
+
+
+	/**
+	* java.lang.IllegalArgumentException: Invalid character found in the request target 
+	*	[/otmmapi/v6/assets?load_type=system&level_of_detail=slim&selection_context=%7B%22selection_context_param%22:%7B%22selection_context%22:%7B%22child_type%22:%22ASSETS%22,%22include_descendants%22:%22NONE%22,%22type%22:%22com.artesia.asset.selection.AssetIdsSelectionContext%22,%22include_deleted_assets%22:false,%22asset_ids%22:[%22411811a6608665e00d3bac8671e67cad043fd40a%22]%7D%7D%7D ]. 
+	* The valid characters are defined in RFC 7230 and RFC 3986
+	* 
+	* https://stackoverflow.com/questions/54287922/the-valid-characters-are-defined-in-rfc-7230-and-rfc-3986
+	* If you use an upper version of Tomcat 8.5 it throws this exception if the URL path contains '[' and ']'. For older versions, it works.
+	*/
+	static async encodeArray(assetIds){
+
+		if(Array.isArray(assetIds)){
+			console.log("\n\tAssetIds is array");
+			var assetIdsStr = ENCODEC_SQUARE_BRACKET_LEFT;
+				
+			var size = assetIds.length;
+			var beforeLast = (size - 1);				
+			for(var i=0; i < size; i++){
+				assetIdsStr += assetIds[i];
+				if (i != beforeLast){
+					assetIdsStr += ",";
+				}
+			}
+			
+			assetIdsStr += ENCODEC_SQUARE_BRACKET_RIGHT;				
+			assetIds = assetIdsStr;
+		}
+		else if (typeof assetIds === 'string' || assetIds instanceof String) {	
+			console.log("\n\tAssetIds is string");
+
+			if ( assetIds.startsWith("[") ){				
+				console.log("\n\tAssetIds encoding square brackets");
+				assetIds = assetIds.replace("[", "").replace("]", "");
+				const assetsArray = assetIds.split(",");
+			
+				var assetIdsStr = ENCODEC_SQUARE_BRACKET_LEFT;
+				
+				var size = assetsArray.length;
+				var beforeLast = (size - 1);
+				
+				for(var i=0; i < size; i++){
+					assetIdsStr += assetsArray[i].trim();
+					if (i != beforeLast){
+						assetIdsStr += ",";
+					}
+				}
+				
+				assetIdsStr = ENCODEC_SQUARE_BRACKET_RIGHT;				
+				assetIds = assetIdsStr;
+			}
+			else {
+				console.log("\n\tAssetIds adding brackets");
+				assetIds = ENCODEC_SQUARE_BRACKET_LEFT  + assetIds + ENCODEC_SQUARE_BRACKET_RIGHT;	
+			}
+		}
+		
+		return assetIds;
+	}
 	
 	/**
 	 * Retrieve assets based on the provided selection context.
@@ -23,41 +83,7 @@ export default class Assets extends OTMMAPI {
 			console.log("URL: " + link);
 			console.log("assetIds: " + assetIds);
 
-
-			// java.lang.IllegalArgumentException: Invalid character found in the request target 
-			// [/otmmapi/v6/assets?load_type=system&level_of_detail=slim&selection_context=%7B%22selection_context_param%22:%7B%22selection_context%22:%7B%22child_type%22:%22ASSETS%22,%22include_descendants%22:%22NONE%22,%22type%22:%22com.artesia.asset.selection.AssetIdsSelectionContext%22,%22include_deleted_assets%22:false,%22asset_ids%22:[%22411811a6608665e00d3bac8671e67cad043fd40a%22]%7D%7D%7D ]. 
-			// The valid characters are defined in RFC 7230 and RFC 3986
-			//
-			// https://stackoverflow.com/questions/54287922/the-valid-characters-are-defined-in-rfc-7230-and-rfc-3986
-			// If you use an upper version of Tomcat 8.5 it throws this exception if the URL path contains '[' and ']'. For older versions, it works.
-			if(Array.isArray(assetIds)){
-				console.log("\n\tAssetIds is array");
-				var assetIdsStr = SQUARE_BRACKET_LEFT;
-					
-				var size = assetIds.length;
-				var beforeLast = (size - 1);				
-				for(var i=0; i < size; i++){
-					assetIdsStr += assetIds[i];
-					if (i != beforeLast){
-						assetIdsStr += ",";
-					}
-				}
-				
-				assetIdsStr = SQUARE_BRACKET_RIGHT;				
-				assetIds = assetIdsStr;
-			}
-			else if (typeof assetIds === 'string' || assetIds instanceof String) {	
-				console.log("\n\tAssetIds is string");
-
-				if ( assetIds.startsWith("[") ){				
-					console.log("\n\tAssetIds adding brackets");
-					//assetIds = assetIds.replace("[", SQUARE_BRACKET_LEFT).replace("]", SQUARE_BRACKET_RIGHT);
-				}
-				else {
-					assetIds = SQUARE_BRACKET_LEFT  + assetIds + SQUARE_BRACKET_RIGHT;	
-				}
-			}
-					
+			assetIds = await Assets.encodeArray(assetIds);					
 
 			let params = {
 					"load_type": "system",
@@ -75,7 +101,9 @@ export default class Assets extends OTMMAPI {
 					}
 			};
 			
+			console.log("\n -----------------------------------");
 			console.log("params: " + JSON.stringify(params));
+			console.log("\n -----------------------------------");
 
 			let result = await OTMMAPI.get(session, link, params);					
 			
