@@ -46,7 +46,6 @@ export default class Assets extends OTMMAPI {
 			
 			// We add the first square brace
 			objString += '[';
-			console.debug(objString);
 			for(var i=0; i< size; i++){
 				objString += `${Assets.stringify(value[i]).trim()}`;
 				
@@ -54,7 +53,6 @@ export default class Assets extends OTMMAPI {
 				if(i != beforeLast){
 					objString += ",";
 				}
-				console.debug("--------" + objString);
 			}
 			// We add the last square brace
 			objString += ']';
@@ -100,7 +98,7 @@ export default class Assets extends OTMMAPI {
 			
 			if(typeof assetIds === 'string'){
 				if(assetIds.startsWith("[")){
-					assetIds = assetIds.replace("[", "").replace("]", "");
+					assetIds = assetIds.replace("[", "").replace("]", "").replace(/\"/g, "");
 				}
 
 				var assets = assetIds.split(",");
