@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import AssetsRoute from './api/SiteRoute.js';
+import SiteRoute from './api/SiteRoute.js';
 
 class Index {
 	static app = express();
