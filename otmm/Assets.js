@@ -131,7 +131,7 @@ export default class Assets extends OTMMAPI {
 			console.log(link);
 			
 			var result = await OTMMAPI.get(session, link, null);					
-	
+				
 			return result.data;
 		} catch (error) {
 			console.error("Error retrieveAssets: " + error);

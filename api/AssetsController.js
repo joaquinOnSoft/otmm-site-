@@ -37,7 +37,7 @@ export default class AssetsController extends AbstractOTMMController{
 		let assetIds = req.query.assetIds;
 	
     	let response = await Assets.retrieveAssets(session, assetIds);
-
+		
         res.json(response);
 	}
 	
