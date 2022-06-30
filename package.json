@@ -5,10 +5,14 @@
   "main": "Index.js",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start-dev": "nodemon index.js"	
   },
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]	
   },
   "keywords": [],
   "author": "Joaquín Garzón Peña",
@@ -23,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.18.2",
-    "jest": "^28.1.1"
+    "jest": "^28.1.1",
+    "supertest": "^6.2.3"
   }
 }

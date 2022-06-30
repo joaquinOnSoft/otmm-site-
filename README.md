@@ -53,7 +53,8 @@ node Index.js
  - [Node.js Unit Testing: Get Started Quickly With Examples](https://www.testim.io/blog/node-js-unit-testing-get-started-quickly-with-examples/)
  - [Setup and Teardown](https://jestjs.io/docs/setup-teardown)
  - [Does Jest support ES6 import/export?](https://stackoverflow.com/questions/35756479/does-jest-support-es6-import-export)
-
+ - [Testing NodeJs/Express API with Jest and Supertest](https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6)
+ - [Writing API Tests with Jest.](https://www.rithmschool.com/courses/intermediate-node-express/api-tests-with-jest)
  
 ### Axios
  - [How to correctly use axios params with arrays](https://stackoverflow.com/questions/49944387/how-to-correctly-use-axios-params-with-arrays)
