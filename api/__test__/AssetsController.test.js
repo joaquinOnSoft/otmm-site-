@@ -33,4 +33,21 @@ describe("OTMM Site API - Assets test", () => {
 	expect(responseJSON.assets_resource.asset_list).not.toBe(undefined);
 	expect(responseJSON.assets_resource.asset_list.length).toBe(2);
   });
+  
+  
+  
+  test("GET /api/v1/assets/recent ", async () => {
+    const response = await request('http://localhost:5000')
+		.get("/api/v1/assets/recent")
+		.set(headers);
+    
+    expect(response.statusCode).toBe(200);
+		
+	let responseJSON = JSON.parse(response.text);
+	
+	expect(responseJSON).not.toBe(undefined);	
+	expect(responseJSON.assets_resource).not.toBe(undefined);	
+	expect(responseJSON.assets_resource.asset_list).not.toBe(undefined);
+	expect(responseJSON.assets_resource.asset_list.length).toBe(25);
+  });  
 });
