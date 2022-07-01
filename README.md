@@ -45,6 +45,14 @@ jest
 ```
 node Index.js
 ```
+## .env file
+`.env` is a properties file which contains the following keys:
+
+ - **OTMM_API_URL** URL of the **API end point** our OpenText Media Management server, e.g. `http://<OTMM_SERVER_URL>/otmmapi`
+ - **OTMM_USER**: OTMM user
+ - **OTMM_PASSWORD**: OTMM password
+ - **PORT**:  OTMM site port.	 Dafault value 5000
+ - **SERVER_URL_TEST**: Address used in test to validate the site API. Default value: [http://localhost:5000](http://localhost:5000)
 
 ## Useful links related with this project
 
