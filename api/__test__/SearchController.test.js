@@ -19,7 +19,7 @@ describe("OTMM Site API - Search test", () => {
     	"keywords": "London"
 	};
 		
-    const response = await request('http://localhost:5000')
+    const response = await request(process.env.SERVER_URL_TEST)
 		.get("/api/v1/search/text")
 		.set(headers)
 		.query(params);

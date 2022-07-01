@@ -17,7 +17,7 @@ beforeEach(async () => {
 describe("OTMM Site API - collections test", () => {
   test("GET /api/v1/collections", async () => {
 		
-    const response = await request('http://localhost:5000')
+    const response = await request(process.env.SERVER_URL_TEST)
 		.get("/api/v1/collections")
 		.set(headers);
     

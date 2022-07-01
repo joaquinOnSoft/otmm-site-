@@ -14,7 +14,7 @@ describe("OTMM Site API test", () => {
 		"password": OTMMAPI.pass
 	};
 		
-    const response = await request('http://localhost:5000')
+    const response = await request(process.env.SERVER_URL_TEST)
 		.post("/api/v1/sessions")
 		.set(headers)
 		.send(body);

@@ -19,7 +19,7 @@ describe("OTMM Site API - Assets test", () => {
     	"assetIds": ["411811a6608665e00d3bac8671e67cad043fd40a", "b156decf0fba4323e646438f0c64f36856b382ef"]
 	};
 		
-    const response = await request('http://localhost:5000')
+    const response = await request(process.env.SERVER_URL_TEST)
 		.get("/api/v1/assets")
 		.set(headers)
 		.query(params);
