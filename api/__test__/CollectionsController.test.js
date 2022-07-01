@@ -4,7 +4,7 @@ import Sessions from '../../otmm/Sessions.js';
 
 var headers = null;
 
-beforeEach(async() => {
+beforeAll(async() => {
     var session = await Sessions.createSession(OTMMAPI.user, OTMMAPI.pass);
     headers = {
         'id': session.session_resource.session.id,

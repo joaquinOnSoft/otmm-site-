@@ -7,7 +7,7 @@ var session = null;
 /**
  * Setup and Teardown - https://jestjs.io/docs/setup-teardown
  */
-beforeEach(async() => {
+beforeAll(async() => {
     session = await Sessions.createSession(OTMMAPI.user, OTMMAPI.pass);
 });
 
