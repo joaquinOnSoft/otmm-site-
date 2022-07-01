@@ -53,8 +53,7 @@ export default class Assets extends OTMMAPI {
                 }
             }
             // We add the last square brace
-            objString += ']';
-            console.debug("--------" + objString);
+            objString += ']';            
         } else if (typeof value === 'object') {
             // We add the first curly brace
             objString += '{';
