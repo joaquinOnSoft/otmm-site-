@@ -18,7 +18,7 @@ describe("OTMM Site API test", () => {
 		.post("/api/v1/sessions")
 		.set(headers)
 		.send(body);
-    //expect(response.body).toEqual(["Elie", "Matt", "Joel", "Michael"]);
+
     expect(response.statusCode).toBe(200);	
 	expect(JSON.stringify(response.text)).not.toBe(undefined);
 		

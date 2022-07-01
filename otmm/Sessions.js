@@ -38,15 +38,30 @@ export default class Sessions extends OTMMAPI {
 	 *	}
 	 * </code>
 	 */
-	static async createSession(_user=this.user, _pass=this.pass){
+	static async createSession(_user, _pass){
 		try {
 			let link = this.urlBase + "/v6/sessions";
 			console.log("URL: " + link);
+			
+			let anonymousLogin = process.env.ANONYMOUS_LOGIN_ENABLED || "false";
+			console.debug("Environment variable ANONYMOUS_LOGIN_ENABLED: " + anonymousLogin);
+			
+			if(anonymousLogin.toLowerCase() == 'true' ){
+				if (typeof _user === 'undefined' || _user == null){
+					console.debug("Using default user to initialize 'user'");
+					_user = OTMMAPI.user;
+				}
+				if (typeof _pass === 'undefined' || _pass == null){				
+					console.debug("Using default user to initialize 'password'");
+					_pass = OTMMAPI.pass;
+				}
+			}
 			
 			let payloadJSON  = {
 				"username": _user,
 				"password": _pass
 			};
+							
 			let payload =  (new URLSearchParams(payloadJSON)).toString()
 
 			const resp = await axios.post(link, payload, {
