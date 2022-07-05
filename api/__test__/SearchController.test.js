@@ -5,14 +5,17 @@ import Sessions from '../../otmm/Sessions.js';
 var headers = null;
 
 beforeAll(async() => {
-    var session = await Sessions.createSession(OTMMAPI.user, OTMMAPI.pass);
-    headers = {
-        'id': session.session_resource.session.id,
-        "message_digest": session.session_resource.session.message_digest
-    }
+	var session = await Sessions.createSession();
+	headers = {
+		'id': session.session_resource.session.id,
+		"message_digest": session.session_resource.session.message_digest
+	}
+
+	console.log(headers);
 });
 
 describe("OTMM Site API - Search test", () => {
+	
     test("GET /api/v1/search/text", async() => {
 
         const params = {
